@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velari Aerial</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f2f2f2; }
+    header { background: #222; color: white; padding: 20px 40px; text-align: center; }
+    section { padding: 40px; max-width: 900px; margin: auto; }
+    .services { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .service-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .gallery img { width: 100%; border-radius: 10px; margin-bottom: 20px; }
+    form { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    input, textarea { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; }
+    button { background: #006c67; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+    footer { background: #222; color: white; text-align: center; padding: 20px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Velari Aerial</h1>
+    <p>Professional Drone Services - South Africa</p>
+  </header>  <section class="gallery">
+    <img src="https://source.unsplash.com/800x400/?drone,landscape" alt="Drone Image 1">
+    <img src="https://source.unsplash.com/800x400/?drone,aerial" alt="Drone Image 2">
+  </section>  <section>
+    <h2>Our Services</h2>
+    <div class="services">
+      <div class="service-card">
+        <h3>LiDAR Surveys</h3>
+        <p>High-precision laser scanning for topographic and infrastructure mapping.</p>
+      </div>
+      <div class="service-card">
+        <h3>Mapping</h3>
+        <p>Detailed aerial maps using photogrammetry and drone imaging.</p>
+      </div>
+      <div class="service-card">
+        <h3>Photogrammetry</h3>
+        <p>Accurate 3D models and measurements from drone photos.</p>
+      </div>
+      <div class="service-card">
+        <h3>Crop Inspection</h3>
+        <p>Monitor plant health and field conditions using drone-based multispectral imagery.</p>
+      </div>
+    </div>
+  </section>  <section>
+    <h2>Contact Us</h2>
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <textarea id="message" placeholder="Project Details" rows="6" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <p id="responseMsg" style="color: red; margin-top: 10px;"></p>
+  </section>  <footer>
+    <p>&copy; 2025 Velari Aerial | South Africa Only</p>
+  </footer>  <script>
+    // Contact form handler with basic geolocation check
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const responseMsg = document.getElementById('responseMsg');
+      responseMsg.textContent = 'Checking location...';
+
+      try {
+        const res = await fetch('https://ipapi.co/json');
+        const data = await res.json();
+
+        if (data.country_name !== 'South Africa') {
+          responseMsg.textContent = 'Sorry, we only accept inquiries from South Africa.';
+          return;
+        }
+
+        // Simulate successful form submission
+        responseMsg.style.color = 'green';
+        responseMsg.textContent = 'Message sent! We will get back to you soon.';
+
+        // Here you would send the form data to your backend or email system
+        // e.g., via Formspree, EmailJS, or your own PHP script
+
+      } catch (error) {
+        responseMsg.textContent = 'Error checking location. Please try again later.';
+      }
+    });
+  </script></body>
+</html>
